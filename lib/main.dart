@@ -3,13 +3,22 @@ import 'dart:ui';
 import 'package:Expanses_Manager/widgets/chart.dart';
 import 'package:Expanses_Manager/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import './widgets/chart.dart';
 import './models/trasaction.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // // allow just portrait mode
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -134,13 +143,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               height: (MediaQuery.of(context).size.height -
-                      appBar.preferredSize.height - MediaQuery.of(context).padding.top) *
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
                   0.3,
               child: Chart(_recentTransaction),
             ),
             Container(
                 height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height - MediaQuery.of(context).padding.top) *
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
                     0.7,
                 child: TransactionList(_userTransactions, _deleteTransaction)),
           ],
